@@ -182,3 +182,78 @@ outerLoop: for i in 1...10{
         }
     }
 }
+
+
+func square(number: Int) -> Int {
+    number * number // or just number * number
+}
+
+let res = square(number: 10)
+
+func doMoreMath() -> Int {
+    5 + 5
+}
+
+let res2 = doMoreMath()
+
+func getUser() -> (first: String, last: String) {
+    (first: "Taylor", last: "Swift")
+}
+
+let user = getUser()
+print(user.first)
+
+func setAge(for person: String, to value: Int) {
+    print("\(person) is now \(value)")
+}
+
+func greet(_ person: String){
+    print("Hi \(person)")
+}
+
+greet("Alex")
+
+func greet(_ person: String, nicely: Bool = true) {
+    if nicely == true {
+        print("Hello, \(person)!")
+    } else {
+        print("Oh no, it's \(person) again...")
+    }
+}
+
+func square(numbers: Int...) {
+    for number in numbers {
+        print("\(number) squared is \(number * number)")
+    }
+}
+
+square(numbers: 1, 2, 3, 4, 5)
+
+enum PasswordError: Error {
+    case obvious
+}
+
+func checkPassword(_ password: String) throws -> Bool {
+    if password == "password" {
+        throw PasswordError.obvious
+    }
+
+    return true
+}
+
+do {
+    try checkPassword("password")
+    print("That password is good!")
+} catch {
+    print("You can't use that password.")
+}
+
+func doubleInPlace(number: inout Int){
+    number *= 2
+}
+
+var num: Int = 1
+
+doubleInPlace(number: &num)
+
+num
