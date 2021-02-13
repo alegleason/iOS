@@ -257,3 +257,108 @@ var num: Int = 1
 doubleInPlace(number: &num)
 
 num
+
+// Closures - assign a procedure to a variable
+// They can be used to do functional programming
+
+let driving = { (place: String ) -> String in
+    return "I am driving my car to \(place)"
+}
+
+let closure_str = driving("San Antonio")
+
+func travel(action: (String, Int) -> String) {
+    print("I'm getting ready to go.")
+    let description = action("London", 60)
+    print(description)
+    print("I arrived!")
+}
+
+travel { 
+    "I'm going to \($0) in my car at \($1) km/h"
+}
+
+func reduce(_ values: [Int], using closure: (Int, Int) -> Int) -> Int {
+    // start with a total equal to the first value
+    var current = values[0]
+
+    // loop over all the values in the array, counting from index 1 onwards
+    for value in values[1...] {
+        // call our closure with the current value and the array element, assigning its result to our current value
+        current = closure(current, value)
+    }
+
+    // send back the final current value
+    return current
+}
+
+let numbers = [10, 20, 30]
+
+let sum = reduce(numbers) { (runningTotal: Int, next: Int) -> Int in
+    return runningTotal + next
+}
+
+print(sum)
+
+// Read as: func travel returns a closure that accepts an string, and the closure returns void
+func travel() -> (String) -> Void {
+    // This is the closure to be returned
+    return {
+        print("I am going to \($0)")
+    }
+}
+
+let result = travel()
+result("London")
+
+struct Sport {
+    var name: String
+    var isOlympicSport: Bool
+
+    var olympicStatus: String {
+        if isOlympicSport {
+            return "\(name) is an Olympic sport"
+        } else {
+            return "\(name) is not an Olympic sport"
+        }
+    }
+}
+
+struct Progress {
+    var task: String
+    var amount: Int {
+        didSet {
+            print("\(task) is now \(amount)% complete")
+        }
+    }
+}
+
+
+var progress = Progress(task: "Loading data", amount: 0)
+
+progress.amount = 30
+progress.amount = 80
+progress.amount = 100
+
+
+struct City {
+    var population: Int
+    
+    func collectTaxes() -> Int {
+        return population * 1000
+    }
+}
+
+let london = City(population: 9_000_000)
+london.collectTaxes()
+
+struct Person {
+    var name: String
+
+    mutating func makeAnonymous() {
+        name = "Anonymous"
+    }
+}
+
+var ppl = Person(name: "Alex")
+ppl.makeAnonymous()
