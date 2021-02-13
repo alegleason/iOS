@@ -362,3 +362,57 @@ struct Person {
 
 var ppl = Person(name: "Alex")
 ppl.makeAnonymous()
+
+struct User {
+    var username: String
+}
+
+extension User {
+    init() {
+        self.username = "Anonymous"
+        print("Creating an anonymous employee…")
+    }
+}
+
+struct FamilyTree {
+    init() {
+        print("Creating family tree!")
+    }
+}
+
+struct Guy {
+    var name: String
+    lazy var familyTree = FamilyTree()
+    static var guysCount = 0
+    
+    init(name: String) {
+        self.name = name
+        Guy.guysCount += 1
+    }
+}
+
+var ed = Guy(name: "Eddy")
+var ed0 = Guy(name: "Eddy0")
+var ed1 = Guy(name: "Eddy1")
+Guy.guysCount
+
+
+struct Doctor {
+    var name: String
+    var location: String
+    private var currentPatient = "Hola"
+    init(name: String, location: String){
+        self.name = name
+        self.location = location
+    }
+}
+let drJones = Doctor(name: "Esther Jones", location: "Bristol")
+
+struct App {
+    var name: String
+    private var sales = 0
+    init(name: String) {
+        self.name = name
+    }
+}
+let spotify = App(name: "Spotify")
