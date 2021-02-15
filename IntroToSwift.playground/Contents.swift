@@ -416,3 +416,85 @@ struct App {
     }
 }
 let spotify = App(name: "Spotify")
+
+
+class Dog {
+    var name: String
+    var breed: String
+    
+    func makeNoise() {
+        print("Woof!")
+    }
+    
+    init(name: String, breed: String){
+        self.name = name
+        self.breed = breed
+    }
+    
+    deinit {
+        print("Class Dog has been destroyed!")
+    }
+}
+
+class Poodle: Dog {
+    init(name: String) {
+        super.init(name: name, breed: "Poodle") /* Put by default Poodle as breed */
+    }
+    
+    override func makeNoise(){
+        print("Yip!")
+    }
+}
+
+let poppy = Dog(name: "Poodle", breed: "Chihuahua")
+let puddle = Poodle(name: "Holly")
+puddle.makeNoise()
+
+
+protocol Identifiable {
+    var id: String { get set }
+}
+
+extension Identifiable {
+    func identify() {
+        print("My ID is \(id).")
+    }
+}
+
+struct MyUser: Identifiable {
+    var id: String
+}
+
+let twostraws = MyUser(id: "twostraws")
+twostraws.identify()
+
+// declare the protocol
+protocol MakesDiagnoses {
+    var name: String { get set }
+    func evaluate(patient: String) -> String
+}
+protocol PrescribesMedicine {
+    func prescribe(drug: String)
+}
+protocol DoctorP: MakesDiagnoses, PrescribesMedicine { }
+
+extension Int {
+    func squared() -> Int {
+        return self.self
+    }
+}
+
+let myNum = 8
+number.squared
+
+extension Collection {
+    func summarize() {
+        print("There are \(count) of us:")
+
+        for name in self {
+            print(name)
+        }
+    }
+}
+
+
