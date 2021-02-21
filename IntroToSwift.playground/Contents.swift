@@ -2,48 +2,62 @@
 // Alejandro Gleason - CS Student
 // http://gleason-portafolio.herokuapp.com
 
+var name: String
 
-let str = "5"
-let num = Int(str)!
+name = "Tim"
 
-let birthYear: Int? = 10
-let year = birthYear ?? 1
-print(year)
 
-let legoBricksSold: Int? = 400_000_000_000
-let numberSold = legoBricksSold!
+func yearAlbumReleased(name: String) -> Int? {
+    if name == "Taylor Swift" { return 2006 }
+    if name == "Fearless" { return 2008 }
+    if name == "Speak Now" { return 2010 }
+    if name == "Red" { return 2012 }
+    if name == "1989" { return 2014 }
 
-func title(for page: Int) -> String? {
-    guard page >= 1 else {
-        return nil
-    }
-    let pageCount = 132
-    if page < pageCount {
-        return "Page \(page)"
-    } else {
-        return nil
-    }
+    return nil
 }
-let pageTitle = title(for: 16)!
 
+var year = yearAlbumReleased(name: "RedD")
 
-let age: Int! = nil
-
-let jeansNumber: Int? = nil
-let jeans = jeansNumber ?? nil
+if let unwrapped = year {
+    print("It was released in \(unwrapped)")
+} else {
+    print("There was an error")
+}
 
 struct Person {
-    var id: String
+    var clothes: String {
+        willSet {
+            updateUI(msg: "I'm changing from \(clothes) to \(newValue)")
+        }
 
-    init?(id: String) {
-        if id.count == 9 {
-            self.id = id
-        } else {
-            return nil
+        didSet {
+            updateUI(msg: "I just changed from \(oldValue) to \(clothes)")
         }
     }
 }
 
-let person: Person? = Person(id: "abc")
+func updateUI(msg: String) {
+    print(msg)
+}
+
+var taylor = Person(clothes: "T-shirts")
+taylor.clothes = "short skirts"
+
+
+func travel(action: (String) -> Void) {
+    print("I'm getting ready to go.")
+    action("London")
+    print("I arrived!")
+}
+
+travel { (place: String) -> Void in
+    print("I'm going to \(place) in my car")
+}
+
+// Declare an empty dict
+var myDict = [String:String]()
+myDict["saludo"] = "whatever_object"
+print(myDict["saludo"]!)
 
 
