@@ -60,4 +60,66 @@ var myDict = [String:String]()
 myDict["saludo"] = "whatever_object"
 print(myDict["saludo"]!)
 
+class Shape {
+    func calculateArea() -> Double {
+        // Swift way to 'implement' abstract classes
+        fatalError("Subclasses need to implement the `calculateArea()` method.")
+    }
+}
 
+// Decided to implement the no parameter version (rather inits)
+class Triangle: Shape {
+    private(set) var base: Double
+    private(set) var height: Double
+    
+    init(base: Double, height: Double) {
+        self.base = base
+        self.height = height
+    }
+    
+    override func calculateArea() -> Double {
+        return (base*height)/2
+    }
+    
+    // Parameter version
+    func calculatePerimeter(a: Double, b: Double, c: Double) -> Double {
+        return a + b + c
+    }
+}
+
+class Circle: Shape {
+    private(set) var radius: Double
+    let PI: Double = 3.1416
+        
+    init(radius: Double) {
+        self.radius = radius
+    }
+    
+    override func calculateArea() -> Double {
+        return PI*radius*radius
+    }
+    
+    func calculatePerimeter() -> Double {
+        return 2 * PI * radius
+    }
+}
+
+class Square: Shape {
+    private(set) var side: Double
+    
+    init(side: Double) {
+        self.side = side
+    }
+    
+    override func calculateArea() -> Double {
+        return side*side
+    }
+    
+    func calculatePerimeter() -> Double {
+        return 4*side
+    }
+}
+
+
+var triangle = Triangle(base: 10, height: 20)
+print(triangle.calculateArea())

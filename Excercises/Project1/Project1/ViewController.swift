@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UITableViewController {
     public var pictures = [String]()
-    
+
     // Called when the screen has loaded
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +32,19 @@ class ViewController: UITableViewController {
         } else {
             print("Error at opening files!")
         }
-        print(pictures)
+        pictures = pictures.sorted()
+        //print(pictures.sorted())
+    }
+    
+    // Overriding how the header should look like
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let myLabel = UILabel()
+        myLabel.frame = CGRect(x: 20, y: 8, width: 320, height: 20)
+        myLabel.font = UIFont(name:"Avenir", size:24)
+        myLabel.text = self.tableView(tableView, titleForHeaderInSection: section)
+        let headerView = UIView()
+        headerView.addSubview(myLabel)
+        return headerView
     }
     
     // Overriding the behavior of how many rows are shown
@@ -45,6 +57,7 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Recycling cells (object pool?)
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
+        cell.textLabel?.font = UIFont(name:"Avenir", size:20)
         // Index path contains both a section number and a row number, here, we only care about the row number
         cell.textLabel?.text = pictures[indexPath.row]
         return cell
@@ -54,7 +67,10 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // This is how you instanciate a personalized view controller
         if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
+            // Pushing parameters
             vc.selectedImage = pictures[indexPath.row]
+            DetailViewController.totalImages = pictures.count
+            vc.currentImage = indexPath.row + 1
             // Pushing and showing the detail view controller
             navigationController?.pushViewController(vc, animated: true)
         }

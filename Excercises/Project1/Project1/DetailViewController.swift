@@ -9,17 +9,22 @@ import UIKit
 
 class DetailViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
+    // Optional vars to pass to the "constructor"
+    static var totalImages: Int?
+    var currentImage: Int?
     var selectedImage: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = selectedImage
+        
+        
         navigationItem.largeTitleDisplayMode = .never
         
-        if let imageToLoad = selectedImage {
+        if let imageToLoad = selectedImage, let currIg = currentImage, let totalIg = DetailViewController.totalImages {
             // If we unwrappe succesfully, update the UIImageView object
             imageView.image = UIImage(named: imageToLoad)
+            title = "Picture \(currIg) of \(totalIg)"
+
         }
     }
     
