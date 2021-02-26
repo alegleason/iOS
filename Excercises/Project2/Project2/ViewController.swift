@@ -22,6 +22,9 @@ class ViewController: UIViewController {
         
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
         
+        // Add a Bar Button to recommend the app
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(scoreTapped))
+        
         // Adding borders to the buttons
         Button1.layer.borderWidth = 1
         Button2.layer.borderWidth = 1
@@ -87,5 +90,16 @@ class ViewController: UIViewController {
         score = 0
         correctAnswer = 0
         questionsAsked = 0
+    }
+    
+    // Action response to show current score
+    @objc func scoreTapped() {
+        // preferredStyle could have also recieved .actionsheet, which is good for the user to pick from a set of options, while .alert for telling user situation change
+        let ac = UIAlertController(title: "SCORE", message: "Your current score is \(score)", preferredStyle: .alert)
+        
+        // It adds a button to the alert and when closed, we tell it to call our askQuestion() method again
+        ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: nil))
+        
+        present(ac, animated: true)
     }
 }

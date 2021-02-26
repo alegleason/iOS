@@ -19,9 +19,6 @@ class ViewController: UITableViewController {
         // Enables large titles across the app
         navigationController?.navigationBar.prefersLargeTitles = true
         
-        // Add a Bar Button to recommend the app
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
-        
         let fm = FileManager.default
         let path = Bundle.main.resourcePath
         let items = try? fm.contentsOfDirectory(atPath: path!)
@@ -37,17 +34,6 @@ class ViewController: UITableViewController {
         }
         pictures = pictures.sorted()
         //print(pictures.sorted())
-    }
-    
-    // Action response to share app button
-    @objc func shareTapped() {
-        let items: [Any] = ["This app is my favorite", URL(string: "https://www.apple.com")!]
-        
-        // Creates the UI Activity View Controller
-        let vc = UIActivityViewController(activityItems: items, applicationActivities: [])
-        // Mandatory line so it does not crash on iPad
-        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        present(vc, animated: true)
     }
     
     // Overriding how the header should look like
