@@ -123,3 +123,19 @@ class Square: Shape {
 
 var triangle = Triangle(base: 10, height: 20)
 print(triangle.calculateArea())
+
+class Singer {
+    func playSong() {
+        print("Shake it off!")
+    }
+}
+
+func sing() -> () -> Void {
+    let taylor = Singer()
+    let singing = { [weak taylor] in
+        taylor?.playSong()
+        return
+    }
+    return singing
+}
+

@@ -1,53 +1,38 @@
 //
 //  ViewController.swift
-//  Project1
+//  Challenge1
 //
-//  Created by Alejandro Gleason on 20/02/21.
+//  Created by Alejandro Gleason on 01/03/21.
 //
 
 import UIKit
 
 class ViewController: UITableViewController {
-    public var pictures = [String]()
+    public var flags = [String]()
 
-    // Called when the screen has loaded
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Storm Viewer"
+        title = "Flags Viewer"
         
         // Enables large titles across the app
         navigationController?.navigationBar.prefersLargeTitles = true
-        
-        // Add a Bar Button to recommend the app
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
         
         let fm = FileManager.default
         let path = Bundle.main.resourcePath
         let items = try? fm.contentsOfDirectory(atPath: path!)
         
+        // Check if items unwrapped succesfully
         if let its = items {
             for it in its {
-                if it.hasPrefix("nssl") {
-                    pictures.append(it)
+                if it.hasSuffix(".png"){
+                    flags.append(it)
                 }
             }
         } else {
             print("Error at opening files!")
         }
-        // Sort in place
-        pictures.sort()
-    }
-    
-    // Action response to share app button
-    @objc func shareTapped() {
-        let items: [Any] = ["This app is my favorite", URL(string: "https://www.apple.com")!]
-        
-        // Creates the UI Activity View Controller
-        let vc = UIActivityViewController(activityItems: items, applicationActivities: [])
-        // Mandatory line so it does not crash on iPad
-        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        present(vc, animated: true)
+        print(flags)
     }
     
     // Overriding how the header should look like
@@ -64,17 +49,19 @@ class ViewController: UITableViewController {
     // Overriding the behavior of how many rows are shown
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // We only override this part
-        print(pictures.count)
-        return pictures.count
+        return flags.count
     }
     
     // Overriding how each row looks like
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Recycling cells (object pool?)
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
-        cell.textLabel?.font = UIFont(name:"Avenir", size:20)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Flag", for: indexPath)
+        cell.textLabel?.font = UIFont(name:"Avenir", size:18)
         // Index path contains both a section number and a row number, here, we only care about the row number
-        cell.textLabel?.text = pictures[indexPath.row]
+        cell.textLabel?.text = flags[indexPath.row]
+        cell.imageView?.image = UIImage(named: flags[indexPath.row])
+        cell.imageView?.layer.borderWidth = 0.4
+        cell.imageView?.layer.borderColor = UIColor.darkGray.cgColor
         return cell
     }
     
@@ -83,13 +70,12 @@ class ViewController: UITableViewController {
         // This is how you instanciate a personalized view controller
         if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
             // Pushing parameters
-            vc.selectedImage = pictures[indexPath.row]
-            DetailViewController.totalImages = pictures.count
+            vc.selectedImage = flags[indexPath.row]
+            DetailViewController.totalImages = flags.count
             vc.currentImage = indexPath.row + 1
             // Pushing and showing the detail view controller
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-   
 }
 
