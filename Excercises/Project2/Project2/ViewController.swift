@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         
         countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
         
-        // Add a Bar Button to recommend the app
+        // Add a Bar Button to look at the current score
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(scoreTapped))
         
         // Adding borders to the buttons

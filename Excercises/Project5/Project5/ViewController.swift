@@ -17,6 +17,9 @@ class ViewController: UITableViewController {
         // remember closures are chunks of words that can be treated as variables
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
         
+        // Add a Bar Button to look at the current score
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
+        
         // Load the resource (file)
         if let startWorldsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
             // Unwrap the content as a string
@@ -32,6 +35,7 @@ class ViewController: UITableViewController {
         startGame()
     }
     
+    @objc
     func startGame() {
         title = allWords.randomElement()
         usedWords.removeAll(keepingCapacity: true)
@@ -70,34 +74,26 @@ class ViewController: UITableViewController {
     func submit(_ answer: String) {
         let lowerAnswer = answer.lowercased()
         
-        let errorTitle: String
-        let errorMessage: String
-        
-        
         if isPossible(word: lowerAnswer) {
             if isOriginal(word: lowerAnswer) {
                 if isReal(word: lowerAnswer) {
-                    
                     usedWords.insert(answer, at: 0)
-                    
                     let indexPath = IndexPath(row: 0, section: 0)
                     // .automatic performs the "standard" animation
                     tableView.insertRows(at: [indexPath], with: .automatic)
-                    
                     return
                 } else {
-                    errorTitle = "Word not recognized"
-                    errorMessage = "You can't just make them up, you know!"
+                    showErrorMessage(errorTitle: "Word not recognized", errorMessage: "You can't just make them up, you know!")
                 }
             } else {
-                errorTitle = "Word already used"
-                errorMessage = "Be more original"
+                showErrorMessage(errorTitle: "Word already used", errorMessage: "Be more original")
             }
         } else {
-            errorTitle = "Word not possible"
-            errorMessage = "You cannot spell that word from \(title!.lowercased())"
+            showErrorMessage(errorTitle: "Word not possible", errorMessage: "You cannot spell that word from \(title!.lowercased())")
         }
-        
+    }
+    
+    func showErrorMessage(errorTitle: String, errorMessage: String) {
         let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
@@ -120,11 +116,18 @@ class ViewController: UITableViewController {
     
     // Determine if the entered word is a word that has already been guessed
     func isOriginal(word: String) -> Bool {
-        return !usedWords.contains(word)
+        if !usedWords.contains(where: {$0.caseInsensitiveCompare(word) == .orderedSame}) && word != title {
+            return true
+        } else {
+            return false
+        }
     }
     
     // Literally, determine if the word is contained on the english dictionary
     func isReal(word: String) -> Bool {
+        if word.count < 3 {
+            return false
+        }
         // UI Kit to check for text related stuff
         let checker = UITextChecker()
         // UI Text Checker is not good with swift, it likes to have the utf16 (@objc) type
