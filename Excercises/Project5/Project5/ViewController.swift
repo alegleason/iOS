@@ -17,7 +17,7 @@ class ViewController: UITableViewController {
         // remember closures are chunks of words that can be treated as variables
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(promptForAnswer))
         
-        // Add a Bar Button to look at the current score
+        // Add a Bar Button to restart the game
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(startGame))
         
         // Load the resource (file)

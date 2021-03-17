@@ -70,7 +70,9 @@ class ViewController: UIViewController {
             let guide = view.safeAreaLayoutGuide
             label.leadingAnchor.constraint(equalTo: guide.leadingAnchor).isActive = true
             label.trailingAnchor.constraint(equalTo: guide.trailingAnchor).isActive = true
-            label.heightAnchor.constraint(equalToConstant: (view.frame.height)/6 - 10).isActive = true
+            // When you use both a multiplier and a constant, the multiplier gets factored in first then the constant. Here we are are saying that each label should measure aprox. 1/6 of the safe area height, minus 10.
+            label.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.15, constant: -10).isActive = true
+
             if let previous = previous {
                 // we have a previous label – create a height constraint
                 label.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
