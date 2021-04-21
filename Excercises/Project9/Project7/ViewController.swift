@@ -23,6 +23,8 @@ class ViewController: UITableViewController {
             // urlString = "https://api.whitehouse.gov/v1/petitions.json?signatureCountFloor=10000&limit=100"
             urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
         }
+        
+        performSelector(inBackground: #selector(fetchJSON), with: urlString)
             
         // alert that shows the users where data comes from
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "help")!.withRenderingMode(.alwaysOriginal), style: UIBarButtonItem.Style.plain, target: self, action: #selector(showCredits))
@@ -30,22 +32,36 @@ class ViewController: UITableViewController {
         // action that lets users filter content
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showFilter))
         
-        if let url = URL(string: urlString) {
-            // Converting into a Data object by using its default constructor
-            if let data = try? Data(contentsOf: url) {
-                // Here it is OK to parse
-                parse(json: data)
-                return
-            }
-        }
-        // If parsing of url or data failed
-        showError()
+        
     }
     
+    @objc func fetchJSON(_ urlString: String) {
+        // passing to a background thread, the UI will no longer freeze while parsing the data
+//        DispatchQueue.global(qos: .userInitiated).async {
+            // this is how we pass the "self" reference to the closure
+//            [weak self] in
+            if let url = URL(string: urlString) {
+                // Converting into a Data object by using its default constructor
+                if let data = try? Data(contentsOf: url) {
+                    // Here it is OK to parse
+//                    self?.parse(json: data)
+                    parse(json: data)
+                    return
+                }
+            }
+            // If parsing of url or data failed
+        performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
+//            self?.showError()
+//        }
+    }
+    
+    @objc
     func showError() {
-        let ac = UIAlertController(title: "Loading error", message: "There was a problem loading the feed; check your connection.", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "Ok", style: .default))
-        present(ac, animated: true)
+        DispatchQueue.main.async { [weak self] in
+            let ac = UIAlertController(title: "Loading error", message: "There was a problem loading the feed; check your connection.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Ok", style: .default))
+            self?.present(ac, animated: true)
+        }
     }
     
     @objc
@@ -75,27 +91,19 @@ class ViewController: UITableViewController {
     
     // function to filter
     func filter(_ words: String) {
-        var temporalPetitions = [Petition]()
         
-        // parse the filtering job to the background
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            for petition in self!.originalPetitions {
-                // case insensitive search
-                if let _ = petition.body.range(of: words, options: .caseInsensitive) {
-                    if let _ = petition.title.range(of: words, options: .caseInsensitive) {
-                        temporalPetitions.append(petition)
-                    }
+        var temporalPetitions = [Petition]()
+        for petition in originalPetitions {
+            // case insensitive search
+            if let _ = petition.body.range(of: words, options: .caseInsensitive) {
+                if let _ = petition.title.range(of: words, options: .caseInsensitive) {
+                    temporalPetitions.append(petition)
                 }
             }
-            return
         }
         
-        // reload table data once bg work has finished
-        DispatchQueue.main.async { [weak self] in
-            self?.filteredPetitions = temporalPetitions
-            self?.tableView.reloadData()
-        }
-       
+        filteredPetitions = temporalPetitions
+        tableView.reloadData()
     }
     
     // Data is any kind of binary data
@@ -106,7 +114,13 @@ class ViewController: UITableViewController {
             // Assign the array of results
             originalPetitions = jsonPetitions.results
             filteredPetitions = originalPetitions
-            tableView.reloadData()
+            // Dispatching back the work to the main thread
+//            DispatchQueue.main.async { [weak self] in
+//                self?.tableView.reloadData()
+//            }
+            tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+        } else {
+            performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
         }
     }
     
@@ -128,7 +142,6 @@ class ViewController: UITableViewController {
         vc.detailItem = filteredPetitions[indexPath.row]
         navigationController?.pushViewController(vc, animated: true)
     }
-
 
 }
 

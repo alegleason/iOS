@@ -22,19 +22,29 @@ class ViewController: UITableViewController {
         // Add a Bar Button to recommend the app
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
         
+        // Substituted function call "openItems(prefix: "nssl")" to background call ->
+        performSelector(inBackground: #selector(openItems), with: "nssl")
+        
+        tableView.reloadData()
+        
+        
+    }
+    
+    @objc func openItems(prefix pre: String) {
         let fm = FileManager.default
         let path = Bundle.main.resourcePath
         let items = try? fm.contentsOfDirectory(atPath: path!)
         
         if let its = items {
             for it in its {
-                if it.hasPrefix("nssl") {
+                if it.hasPrefix(pre) {
                     pictures.append(it)
                 }
             }
         } else {
             print("Error at opening files!")
         }
+        
         // Sort in place
         pictures.sort()
     }
