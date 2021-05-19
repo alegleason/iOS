@@ -13,6 +13,7 @@
 		8803D5A2264CB6F6003C7EF5 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8803D5A1264CB6F6003C7EF5 /* GameViewController.swift */; };
 		8803D5A5264CB6F6003C7EF5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8803D5A3264CB6F6003C7EF5 /* Main.storyboard */; };
 		8803D5A7264CB6F8003C7EF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8803D5A6264CB6F8003C7EF5 /* Assets.xcassets */; };
+		88F272112655CD1800D5CC12 /* FireParticles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 88F272102655CD1700D5CC12 /* FireParticles.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		8803D5A4264CB6F6003C7EF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8803D5A6264CB6F8003C7EF5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8803D5A8264CB6F8003C7EF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88F272102655CD1700D5CC12 /* FireParticles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = FireParticles.sks; path = "../../../HackingWithSwift-main/Classic/project11-files/Content/FireParticles.sks"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				8803D599264CB6F6003C7EF5 /* AppDelegate.swift */,
 				8803D59B264CB6F6003C7EF5 /* GameScene.sks */,
 				8803D59F264CB6F6003C7EF5 /* GameScene.swift */,
+				88F272102655CD1700D5CC12 /* FireParticles.sks */,
 				8803D5A1264CB6F6003C7EF5 /* GameViewController.swift */,
 				8803D5A3264CB6F6003C7EF5 /* Main.storyboard */,
 				8803D5A6264CB6F8003C7EF5 /* Assets.xcassets */,
@@ -125,6 +128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8803D5A5264CB6F6003C7EF5 /* Main.storyboard in Resources */,
+				88F272112655CD1800D5CC12 /* FireParticles.sks in Resources */,
 				8803D59C264CB6F6003C7EF5 /* GameScene.sks in Resources */,
 				8803D5A7264CB6F8003C7EF5 /* Assets.xcassets in Resources */,
 			);
