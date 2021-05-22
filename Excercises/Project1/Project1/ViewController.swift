@@ -8,8 +8,8 @@
 import UIKit
 
 class ViewController: UITableViewController {
-    public var pictures = [String]()
-
+    public var pictures = [Image]()
+    
     // Called when the screen has loaded
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,9 +25,22 @@ class ViewController: UITableViewController {
         // Substituted function call "openItems(prefix: "nssl")" to background call ->
         performSelector(inBackground: #selector(openItems), with: "nssl")
         
+        let defaults = UserDefaults.standard
+        
+        // Retrieve the saved people array
+        if let savedImages = defaults.object(forKey: "pictures") as? Data {
+            // Unpack it as json object
+            let jsonDecoder = JSONDecoder()
+            // We are going to use a try catch statement for errors
+            
+            do {
+                pictures = try jsonDecoder.decode([Image].self, from: savedImages)
+            } catch {
+                print("Failed to load people.")
+            }
+        }
+        
         tableView.reloadData()
-        
-        
     }
     
     @objc func openItems(prefix pre: String) {
@@ -38,7 +51,8 @@ class ViewController: UITableViewController {
         if let its = items {
             for it in its {
                 if it.hasPrefix(pre) {
-                    pictures.append(it)
+                    let img = Image(times: 0, name: it)
+                    pictures.append(img)
                 }
             }
         } else {
@@ -47,6 +61,7 @@ class ViewController: UITableViewController {
         
         // Sort in place
         pictures.sort()
+        save()
     }
     
     // Action response to share app button
@@ -84,7 +99,7 @@ class ViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
         cell.textLabel?.font = UIFont(name:"Avenir", size:20)
         // Index path contains both a section number and a row number, here, we only care about the row number
-        cell.textLabel?.text = pictures[indexPath.row]
+        cell.textLabel?.text = pictures[indexPath.row].imageName
         return cell
     }
     
@@ -92,12 +107,26 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // This is how you instanciate a personalized view controller
         if let vc = storyboard?.instantiateViewController(identifier: "Detail") as? DetailViewController {
+            // Updating image count
+            pictures[indexPath.row].timesShown += 1
+            save()
             // Pushing parameters
             vc.selectedImage = pictures[indexPath.row]
             DetailViewController.totalImages = pictures.count
             vc.currentImage = indexPath.row + 1
             // Pushing and showing the detail view controller
             navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func save(){
+        let jsonEncoder = JSONEncoder()
+        
+        if let savedData = try? jsonEncoder.encode(pictures) {
+            let defaults = UserDefaults.standard
+            defaults.set(savedData, forKey: "pictures")
+        } else {
+            print("Failed to save pictures.")
         }
     }
    

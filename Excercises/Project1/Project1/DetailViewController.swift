@@ -12,7 +12,7 @@ class DetailViewController: UIViewController {
     // Optional vars to pass to the "constructor"
     static var totalImages: Int?
     var currentImage: Int?
-    var selectedImage: String?
+    var selectedImage: Image?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +22,8 @@ class DetailViewController: UIViewController {
         
         if let imageToLoad = selectedImage, let currIg = currentImage, let totalIg = DetailViewController.totalImages {
             // If we unwrappe succesfully, update the UIImageView object
-            imageView.image = UIImage(named: imageToLoad)
-            title = "Picture \(currIg) of \(totalIg)"
+            imageView.image = UIImage(named: imageToLoad.imageName)
+            title = "Picture \(currIg) of \(totalIg) - times: \(imageToLoad.timesShown)"
 
         }
     }

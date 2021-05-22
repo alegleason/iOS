@@ -24,6 +24,7 @@
 		88E541BB25E19BF1004173FF /* nssl0043.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88E541B125E19BF1004173FF /* nssl0043.jpg */; };
 		88E541BC25E19BF1004173FF /* nssl0033.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88E541B225E19BF1004173FF /* nssl0033.jpg */; };
 		88E541BD25E19BF1004173FF /* nssl0034.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 88E541B325E19BF1004173FF /* nssl0034.jpg */; };
+		88FB1195265981390065D1EC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88FB1194265981390065D1EC /* Image.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		88E541B125E19BF1004173FF /* nssl0043.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0043.jpg; sourceTree = "<group>"; };
 		88E541B225E19BF1004173FF /* nssl0033.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0033.jpg; sourceTree = "<group>"; };
 		88E541B325E19BF1004173FF /* nssl0034.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = nssl0034.jpg; sourceTree = "<group>"; };
+		88FB1194265981390065D1EC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				88E5419425E197BF004173FF /* SceneDelegate.swift */,
 				88E5419625E197BF004173FF /* ViewController.swift */,
 				88D6F58A25E2B91C00D4B3C5 /* DetailViewController.swift */,
+				88FB1194265981390065D1EC /* Image.swift */,
 				88E5419825E197BF004173FF /* Main.storyboard */,
 				88E5419B25E197C1004173FF /* Assets.xcassets */,
 				88E5419D25E197C1004173FF /* LaunchScreen.storyboard */,
@@ -193,6 +196,7 @@
 				88E5419325E197BF004173FF /* AppDelegate.swift in Sources */,
 				88E5419525E197BF004173FF /* SceneDelegate.swift in Sources */,
 				88D6F58B25E2B91C00D4B3C5 /* DetailViewController.swift in Sources */,
+				88FB1195265981390065D1EC /* Image.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
