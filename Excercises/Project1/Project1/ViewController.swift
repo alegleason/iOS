@@ -88,8 +88,6 @@ class ViewController: UITableViewController {
     
     // Overriding the behavior of how many rows are shown
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // We only override this part
-        print(pictures.count)
         return pictures.count
     }
     
