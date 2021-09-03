@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u8T-8T-pd4">
-                                <rect key="frame" x="26" y="106" width="365" height="617"/>
+                                <rect key="frame" x="26" y="106" width="365" height="591"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i5B-U7-4q7">
                                         <rect key="frame" x="10" y="10" width="345" height="450"/>
@@ -31,8 +31,20 @@
                                     <constraint firstItem="i5B-U7-4q7" firstAttribute="top" secondItem="u8T-8T-pd4" secondAttribute="top" constant="10" id="gfU-rm-dcc"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Intensity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8K-9H-ACu">
-                                <rect key="frame" x="25" y="770" width="70" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Radius:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BHS-7t-w5N">
+                                <rect key="frame" x="25" y="723" width="56" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vF3-f2-Dey" userLabel="Radius">
+                                <rect key="frame" x="105" y="717" width="281" height="31"/>
+                                <connections>
+                                    <action selector="radiusChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="SEv-Ih-QGd"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Intensity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8K-9H-ACu">
+                                <rect key="frame" x="25" y="757" width="70" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="IBl-gH-pik"/>
                                 </constraints>
@@ -41,7 +53,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="3tB-6v-nn6">
-                                <rect key="frame" x="106" y="765" width="280" height="30"/>
+                                <rect key="frame" x="106" y="739" width="280" height="56"/>
                                 <connections>
                                     <action selector="intensityChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Ljg-un-dW4"/>
                                 </connections>
@@ -72,26 +84,34 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="u8T-8T-pd4" secondAttribute="trailing" constant="23" id="30f-J8-ScQ"/>
+                            <constraint firstItem="vF3-f2-Dey" firstAttribute="top" secondItem="u8T-8T-pd4" secondAttribute="bottom" constant="20" id="4a3-hx-cBs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vF3-f2-Dey" secondAttribute="trailing" constant="30" id="84q-gu-g0J"/>
                             <constraint firstItem="V8K-9H-ACu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="AE3-uB-EaI"/>
                             <constraint firstItem="u8T-8T-pd4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="18" id="Cu1-ss-ZZG"/>
                             <constraint firstItem="V7F-cB-p40" firstAttribute="top" secondItem="O6m-Zs-ql9" secondAttribute="top" id="EC8-K6-7l1"/>
+                            <constraint firstItem="vF3-f2-Dey" firstAttribute="trailing" secondItem="O6m-Zs-ql9" secondAttribute="trailing" id="EJl-uY-Oym"/>
                             <constraint firstItem="V7F-cB-p40" firstAttribute="baseline" secondItem="O6m-Zs-ql9" secondAttribute="firstBaseline" id="GcU-dI-x0H"/>
-                            <constraint firstItem="V8K-9H-ACu" firstAttribute="top" secondItem="u8T-8T-pd4" secondAttribute="bottom" constant="47" id="ISE-MJ-BhV"/>
+                            <constraint firstItem="V8K-9H-ACu" firstAttribute="top" secondItem="u8T-8T-pd4" secondAttribute="bottom" constant="60" id="ISE-MJ-BhV"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="V7F-cB-p40" secondAttribute="bottom" constant="20" id="JrW-g9-Ibz"/>
                             <constraint firstItem="3tB-6v-nn6" firstAttribute="trailing" secondItem="O6m-Zs-ql9" secondAttribute="trailing" id="O6q-Gi-umm"/>
                             <constraint firstItem="V7F-cB-p40" firstAttribute="top" secondItem="3tB-6v-nn6" secondAttribute="bottom" constant="4" id="OYf-2T-o9e"/>
-                            <constraint firstItem="V7F-cB-p40" firstAttribute="top" secondItem="V8K-9H-ACu" secondAttribute="bottom" constant="7" id="WgF-pY-9M7"/>
+                            <constraint firstItem="vF3-f2-Dey" firstAttribute="leading" secondItem="BHS-7t-w5N" secondAttribute="trailing" constant="26" id="QTg-nA-AJh"/>
+                            <constraint firstItem="V7F-cB-p40" firstAttribute="top" secondItem="V8K-9H-ACu" secondAttribute="bottom" constant="20" id="WgF-pY-9M7"/>
                             <constraint firstItem="3tB-6v-nn6" firstAttribute="top" secondItem="u8T-8T-pd4" secondAttribute="bottom" constant="42" id="ZAT-8k-7Bc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3tB-6v-nn6" secondAttribute="trailing" constant="30" id="bjX-m7-A1d"/>
                             <constraint firstItem="u8T-8T-pd4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="26" id="cDv-hq-Al7"/>
                             <constraint firstItem="V8K-9H-ACu" firstAttribute="leading" secondItem="V7F-cB-p40" secondAttribute="leading" id="cb6-tb-qN2"/>
+                            <constraint firstItem="BHS-7t-w5N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="oIh-6N-fZq"/>
+                            <constraint firstItem="BHS-7t-w5N" firstAttribute="top" secondItem="u8T-8T-pd4" secondAttribute="bottom" constant="26" id="qKC-4D-nAZ"/>
                             <constraint firstItem="3tB-6v-nn6" firstAttribute="leading" secondItem="V8K-9H-ACu" secondAttribute="trailing" constant="13" id="tsD-I7-nQ8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pef-yB-Wvr"/>
                     <connections>
+                        <outlet property="changeFilterBtn" destination="V7F-cB-p40" id="u2J-Hr-8ID"/>
                         <outlet property="imageView" destination="i5B-U7-4q7" id="eow-cH-zct"/>
                         <outlet property="intensity" destination="3tB-6v-nn6" id="9CG-r1-5sV"/>
+                        <outlet property="radius" destination="vF3-f2-Dey" id="vi8-lR-ryE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
