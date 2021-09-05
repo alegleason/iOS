@@ -12,6 +12,7 @@ class GameScene: SKScene {
     var slots = [WhackSlot]()
     
     var popupTime = 0.85
+    var numRounds = 0
     
     var score = 0 {
         didSet {
@@ -46,6 +47,34 @@ class GameScene: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        let location = touch.location(in: self)
+        let tappedNodes = nodes(at: location) // this is how we retrieve all nodes that were tapped
+        
+        for node in tappedNodes{
+            guard let whackSlot = node.parent?.parent as? WhackSlot else { continue }
+            
+            if !whackSlot.isVisible { continue }
+            if whackSlot.isHit { continue }
+            whackSlot.hit()
+            
+            if node.name == "charFriend" { // they shouldn't have whacked this penguin
+                
+                score -= 5
+                
+                run(SKAction.playSoundFileNamed("whackBad.caf", waitForCompletion: false))
+            } else if node.name == "charEnemy" { // they should have whacked this one
+                
+                // shrink the penguin image
+                whackSlot.charNode.xScale = 0.85
+                whackSlot.charNode.yScale = 0.85
+            
+                score += 1
+                
+                run(SKAction.playSoundFileNamed("whack.caf", waitForCompletion: false))
+                
+            }
+        }
 
     }
     
@@ -57,6 +86,28 @@ class GameScene: SKScene {
     }
     
     func createEnemy(){
+        numRounds += 1
+        
+        if numRounds >= 3 {
+            for slot in slots {
+                slot.hide()
+            }
+            
+            let gameOver = SKSpriteNode(imageNamed: "gameOver")
+            let finalScore = SKLabelNode()
+            finalScore.text = "Score: \(score)"
+            gameOver.position = CGPoint(x: 512, y: 384)
+            finalScore.position = CGPoint(x: 512, y: 320)
+            finalScore.fontName = "Avenir-Black" //font weight
+            finalScore.fontSize = 36
+            finalScore.zPosition = 1
+            gameOver.zPosition = 1
+            addChild(gameOver)
+            addChild(finalScore)
+            run(SKAction.playSoundFileNamed("gameOver.wav", waitForCompletion: false))
+            return // this helps stop calling createEnemy
+        }
+        
         popupTime *= 0.991 // reducing by 9% the popupTime
         
         slots.shuffle()

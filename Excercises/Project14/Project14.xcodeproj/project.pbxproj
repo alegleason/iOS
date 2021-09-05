@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8854EE2D26E5448D00A54696 /* gameOver.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8854EE2C26E5448D00A54696 /* gameOver.wav */; };
+		8854EE2F26E54CD300A54696 /* Mud.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8854EE2E26E54CD300A54696 /* Mud.sks */; };
 		88F4039326E2A6F700248BD7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F4039226E2A6F700248BD7 /* AppDelegate.swift */; };
 		88F4039526E2A6F700248BD7 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 88F4039426E2A6F700248BD7 /* GameScene.sks */; };
 		88F4039926E2A6F700248BD7 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F4039826E2A6F700248BD7 /* GameScene.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8854EE2C26E5448D00A54696 /* gameOver.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = gameOver.wav; path = "../../../HackingWithSwift-main/Classic/project14-files/Content/gameOver.wav"; sourceTree = "<group>"; };
+		8854EE2E26E54CD300A54696 /* Mud.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Mud.sks; sourceTree = "<group>"; };
 		88F4038F26E2A6F700248BD7 /* Project14.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project14.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88F4039226E2A6F700248BD7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		88F4039426E2A6F700248BD7 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -65,12 +69,14 @@
 				88F4039226E2A6F700248BD7 /* AppDelegate.swift */,
 				88F4039426E2A6F700248BD7 /* GameScene.sks */,
 				88F4039826E2A6F700248BD7 /* GameScene.swift */,
+				8854EE2E26E54CD300A54696 /* Mud.sks */,
 				88F403AB26E2A9A600248BD7 /* WhackSlot.swift */,
 				88F4039A26E2A6F700248BD7 /* GameViewController.swift */,
 				88F4039C26E2A6F700248BD7 /* Main.storyboard */,
 				88F4039F26E2A6F900248BD7 /* Assets.xcassets */,
 				88F403A126E2A6F900248BD7 /* Info.plist */,
 				88F403A826E2A7C900248BD7 /* whack.caf */,
+				8854EE2C26E5448D00A54696 /* gameOver.wav */,
 				88F403A726E2A7C900248BD7 /* whackBad.caf */,
 			);
 			path = Project14;
@@ -133,6 +139,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8854EE2D26E5448D00A54696 /* gameOver.wav in Resources */,
+				8854EE2F26E54CD300A54696 /* Mud.sks in Resources */,
 				88F4039E26E2A6F700248BD7 /* Main.storyboard in Resources */,
 				88F403AA26E2A7C900248BD7 /* whack.caf in Resources */,
 				88F403A926E2A7C900248BD7 /* whackBad.caf in Resources */,
