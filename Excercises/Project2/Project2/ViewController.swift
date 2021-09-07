@@ -74,6 +74,12 @@ class ViewController: UIViewController {
         var title: String
         let message: String
         
+        sender.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 5, options: [], animations: {
+            sender.transform = .identity
+        }, completion: nil)
+        
         if sender.tag == correctAnswer {
             title = "Correct"
             message = "That is \(countries[correctAnswer]) flag"

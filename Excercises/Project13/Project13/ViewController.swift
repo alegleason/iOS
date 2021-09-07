@@ -133,7 +133,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         // the first parameter it's the actual image, while the second one is the size of the image (gotten from .extent)
         if let cgimg = context.createCGImage(outputImage, from: outputImage.extent) { // creating a CGImage from a CoreImage filter
             let processedImage = UIImage(cgImage: cgimg)
+            imageView.alpha = 0
             imageView.image = processedImage
+            UIView.animate(withDuration: 1.0, delay: 0, animations: {
+                self.imageView.alpha = 1
+            })
         }
     }
     

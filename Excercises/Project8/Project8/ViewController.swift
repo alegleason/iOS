@@ -168,10 +168,17 @@ class ViewController: UIViewController {
     // These are gonna get called when the buttons are tapped
     @objc func letterTapped(_ sender: UIButton) {
         guard let buttonTitle = sender.titleLabel?.text else { return }
+        // Animate the button so it fades out
+        UIView.animate(withDuration: 0.2, delay: 0, animations: {
+            sender.alpha = 0
+        }) { finished in
+            sender.isHidden = false
+        }
         currentAnswer.text = currentAnswer.text?.appending(buttonTitle)
         activatedButtons.append(sender)
-        sender.isHidden = true
+        
     }
+
 
     @objc func submitTapped(_ sender: UIButton) {
         guard let answerText = currentAnswer.text else { return }
