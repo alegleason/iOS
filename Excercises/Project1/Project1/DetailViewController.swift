@@ -17,8 +17,9 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         navigationItem.largeTitleDisplayMode = .never
+        
+        assert(selectedImage != nil, "Image loaded in Detail View Controller is nil")
         
         if let imageToLoad = selectedImage, let currIg = currentImage, let totalIg = DetailViewController.totalImages {
             // If we unwrappe succesfully, update the UIImageView object

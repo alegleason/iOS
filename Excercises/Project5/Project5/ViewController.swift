@@ -72,6 +72,7 @@ class ViewController: UITableViewController {
     }
     
     func submit(_ answer: String) {
+        assert(answer.count < 6, "Only words with less than 6 letters should be allowed")
         let lowerAnswer = answer.lowercased()
         
         if isPossible(word: lowerAnswer) {
